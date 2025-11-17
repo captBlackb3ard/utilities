@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-# Bash script to install Docker (if needed), build an Ubuntu image with OpenSSH, Apache, vsftpd, & supervisord and run it with Docker compose.
-# Tested on Linux Mint/Ubuntu Desktop (assumes no GUI is present)
 
 : "
+ Bash script to install Docker (if needed), build an Ubuntu image with OpenSSH, Apache, vsftpd, & supervisord and run it with Docker compose.
+ Tested on Linux Mint/Ubuntu Desktop.
+ 
+ version = 0.8
+ https://www.blackbeardcyber.com
+
+ ** Use at your own risk
+ 
  How to Use This Script
  ===========================================================
  + This script assumes that the Linux host OS (Linux Mint/Ubuntu) has an active internet connection.
@@ -13,7 +19,7 @@
  + Execute script with 'sudo':
   sudo ./docker-ubuntu-webserver-stack.sh
 
- + During execution, a project folder 'docker-ubuntu-server-web-stack' is created and all additional
+ + During execution, a project folder 'docker-ubuntu-server-web-stack' is created, and all additional
    config files are placed in this directory.
  + Once execution is completed, you can delete the folder with:
   sudo rm -rf docker-ubuntu-server-web-stack/
@@ -24,10 +30,10 @@
 
 set -e # Exit immediately if command exits with non-zero status
 set -u # Treat unset variables as an error & exit
-# Support non bash environments
+# Support non-Bash environments
 (set -o pipefail) 2>/dev/null && set -o pipefail
 
-# VTY Color Variables
+# VTY Colour Variables
 #-----------------------------------------------------
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
@@ -40,7 +46,7 @@ PROJECT_DIR="${PWD}/docker-ubuntu-server-web-stack"
 IMAGE_NAME="ubuntu-server-web-stack"
 CONTAINER_NAME="ubuntu-server-web-stack"
 SSH_USER="webstackuser"
-# If SSH_PASSWORD is not set, strong random password will be generated
+# If SSH_PASSWORD is not set, a strong random password will be generated
 SSH_PASSWORD="${SSH_PASSWORD:-}"
 
 SSH_PORT=2222
@@ -80,7 +86,7 @@ echo -e "              ${BLUE}Docker Ubuntu Server Web Stack${NC}"
 echo "**********************************************************"
 echo 
 
-echo -e "**${RED}IMPORTANT${NC}:** Ensure host OS is upto date and critical data backed up before executing this script!"
+echo -e "**${RED}IMPORTANT${NC}:** Ensure host OS is up to date and critical data backed up before executing this script!"
 echo
 read -p "Do you want to proceed - No or Yes? (n/N/y/Y): " response
 [ -z "$response" ] && response="N" #Set default response
@@ -261,12 +267,12 @@ xferlog_enable=YES
 connect_from_port_20=YES
 # Config FTP server welcome banner
 ftpd_banner=Welcome to VSFTPD.
-# Local users logged in placed in 'chroot' preventing access to their home dir 
+# Local users logged in are placed in 'chroot', preventing access to their home dir 
 chroot_local_user=YES
-# Prevent chroot directory from being writeable by user
+# Prevent chroot directory from being writeable by the user
 allow_writeable_chroot=YES
 
-# Passive FTP Ports - Used for data transfer (match docker port mapping)
+# Passive FTP Ports - Used for data transfer (match Docker port mapping)
 pasv_enable=YES
 pasv_min_port=21100
 pasv_max_port=21110
