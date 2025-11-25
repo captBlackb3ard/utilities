@@ -2,7 +2,7 @@
 
 : "
  Bash script to install Docker (if needed), build an Ubuntu image with OpenSSH, Apache, vsftpd, & supervisord and run it with Docker compose.
- Tested on Linux Mint/Ubuntu Desktop.
+ Tested on Linux Mint/Ubuntu Desktop & Server.
  
  version = 0.8
  https://www.blackbeardcyber.com
